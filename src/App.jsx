@@ -1,4 +1,5 @@
 import React from 'react';
+import Example from './Example';
 import  { BasicBox, PageLayout, CardLikeBox, MUIBasicsDemo } from './Basics';
 import MuiDemo from './Basics';
 import Drawer from "@mui/material/Drawer";
@@ -7,7 +8,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { Stack, Grid, Paper, Box, Typography } from '@mui/material';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
-function Home() {
+export function Home() {
     return (
         <Stack spacing={4} sx={{ mt: 4, px: 2 }}>
             <BasicBox />
@@ -15,17 +16,16 @@ function Home() {
             <CardLikeBox />
             <MUIBasicsDemo />
             <MuiDemo />
+            <Example />
 
             <Typography variant="h5">Stack + Grid + Flexbox Layout</Typography>
 
-            {/* Stack */}
             <Stack direction="row" spacing={2}>
                 <Button variant="contained">One</Button>
                 <Button variant="contained">Two</Button>
                 <Button variant="contained">Three</Button>
             </Stack>
 
-            {/* Grid */}
             <Grid container spacing={2}>
                 {[1, 2, 3].map((item) => (
                     <Grid item xs={12} sm={6} md={4} key={item}>
@@ -34,7 +34,6 @@ function Home() {
                 ))}
             </Grid>
 
-            {/* Flexbox with Box */}
             <Box sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
