@@ -1,101 +1,34 @@
-import React, { useState } from 'react';
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
-function RegistrationForm() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [gender, setGender] = useState('');
-  const [country, setCountry] = useState('');
-  const [isSubscribed, setIsSubscribed] = useState(false);
+const schema = yup.object({
+  email: yup.string().email().required(),
+  password: yup.string().min(6).required(),
+});
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+function RHFLoginForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
 
-    const message = `
-      Name: ${name}
-      Email: ${email}
-      Gender: ${gender}
-      Country: ${country}
-      Subscribed: ${isSubscribed ? 'Yes' : 'No'}
-    `;
-    
-    alert(message);
+  const onSubmit = (data) => {
+    console.log(data);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Registration Form</h2>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input {...register("email")} placeholder="Email" />
+      {errors.email && <p>{errors.email.message}</p>}
 
-      <div>
-        <label>Name:</label><br />
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-      </div>
+      <input type="password" {...register("password")} placeholder="Password" />
+      {errors.password && <p>{errors.password.message}</p>}
 
-      <div>
-        <label>Email:</label><br />
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </div>
-
-      <div>
-        <label>Gender:</label><br />
-        <label>
-          <input
-            type="radio"
-            name="gender"
-            value="male"
-            checked={gender === 'male'}
-            onChange={(e) => setGender(e.target.value)}
-            required
-          /> Male
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="gender"
-            value="female"
-            checked={gender === 'female'}
-            onChange={(e) => setGender(e.target.value)}
-          /> Female
-        </label>
-      </div>
-
-      <div>
-        <label>Country:</label><br />
-        <select
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
-          required
-        >
-          <option value="">--Select--</option>
-          <option value="in">India</option>
-          <option value="us">USA</option>
-          <option value="uk">UK</option>
-        </select>
-      </div>
-
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={isSubscribed}
-            onChange={(e) => setIsSubscribed(e.target.checked)}
-          />
-          Subscribe to MyPage
-        </label>
-      </div>
-
-      <button type="submit">Register</button>
+      <button type="submit">Login</button>
     </form>
   );
 }
 
-export default RegistrationForm;
+export default RHFLoginForm;
