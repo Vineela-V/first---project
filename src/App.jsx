@@ -89,7 +89,7 @@ function RegistrationForm() {
             checked={isSubscribed}
             onChange={(e) => setIsSubscribed(e.target.checked)}
           />
-          Subscribe to newsletter
+          Subscribe to MyPage
         </label>
       </div>
 
