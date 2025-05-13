@@ -1,102 +1,101 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText, Divider, Typography, Box, Button } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
-function App() {
-  const [drawerOpen, setDrawerOpen] = useState(false);
+function RegistrationForm() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [gender, setGender] = useState('');
+  const [country, setCountry] = useState('');
+  const [isSubscribed, setIsSubscribed] = useState(false);
 
-  const handleDrawerToggle = () => {
-    setDrawerOpen(!drawerOpen);
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const handleLogout = () => {
-    console.log('Logging out...');
+    const message = `
+      Name: ${name}
+      Email: ${email}
+      Gender: ${gender}
+      Country: ${country}
+      Subscribed: ${isSubscribed ? 'Yes' : 'No'}
+    `;
+    
+    alert(message);
   };
 
   return (
-    <Router>
-      <Box sx={{ display: 'flex' }}>
+    <form onSubmit={handleSubmit}>
+      <h2>Registration Form</h2>
 
-        <AppBar position="fixed">
-          <Toolbar>
-            <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleDrawerToggle}>
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" sx={{ flexGrow: 1 }}>
-              My App
-            </Typography>
-            <Button color="inherit" component={Link} to="/profile">
-              Profile
-            </Button>
-            <Button color="inherit" component={Link} to="/items">
-              Items
-            </Button>
-            <Button color="inherit" onClick={handleLogout}>
-              Logout
-            </Button>
-          </Toolbar>
-        </AppBar>
+      <div>
+        <label>Name:</label><br />
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+      </div>
 
-        <Drawer
-          sx={{
-            width: 240,
-            flexShrink: 0,
-            '& .MuiDrawer-paper': {
-              width: 240,
-              boxSizing: 'border-box',
-            },
-          }}
-          variant="persistent"
-          anchor="left"
-          open={drawerOpen}
-          onClose={handleDrawerToggle}
+      <div>
+        <label>Email:</label><br />
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+      </div>
+
+      <div>
+        <label>Gender:</label><br />
+        <label>
+          <input
+            type="radio"
+            name="gender"
+            value="male"
+            checked={gender === 'male'}
+            onChange={(e) => setGender(e.target.value)}
+            required
+          /> Male
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="gender"
+            value="female"
+            checked={gender === 'female'}
+            onChange={(e) => setGender(e.target.value)}
+          /> Female
+        </label>
+      </div>
+
+      <div>
+        <label>Country:</label><br />
+        <select
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
+          required
         >
-          <List>
-            <ListItem button component={Link} to="/" onClick={handleDrawerToggle}>
-              <ListItemText primary="Home" />
-            </ListItem>
-            <ListItem button component={Link} to="/profile" onClick={handleDrawerToggle}>
-              <ListItemText primary="Profile" />
-            </ListItem>
-            <ListItem button component={Link} to="/items" onClick={handleDrawerToggle}>
-              <ListItemText primary="Items" />
-            </ListItem>
-          </List>
-          <Divider />
-        </Drawer>
+          <option value="">--Select--</option>
+          <option value="in">India</option>
+          <option value="us">USA</option>
+          <option value="uk">UK</option>
+        </select>
+      </div>
 
-        <Box
-          component="main"
-          sx={{
-            flexGrow: 1,
-            bgcolor: 'background.default',
-            padding: 3,
-            marginLeft: 240, 
-            marginTop: 8,   
-          }}
-        >
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/items" element={<Items />} />
-          </Routes>
-        </Box>
-      </Box>
-    </Router>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={isSubscribed}
+            onChange={(e) => setIsSubscribed(e.target.checked)}
+          />
+          Subscribe to newsletter
+        </label>
+      </div>
+
+      <button type="submit">Register</button>
+    </form>
   );
 }
 
-function Home() {
-  return <Typography variant="h4">Home Page</Typography>;
-}
-
-function Profile() {
-  return <Typography variant="h4">Profile Page</Typography>;
-}
-
-function Items() {
-  return <Typography variant="h4">Items Page</Typography>;
-}
-
-export default App;
+export default RegistrationForm;
