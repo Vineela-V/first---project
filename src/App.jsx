@@ -1,76 +1,48 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { TextField, Button, Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import CustomTextField from "./CustomTextField";
+import CustomSelect from "./CustomSelect";
 
 const schema = yup.object({
   name: yup.string().required("Name is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
-  age: yup.number().positive("Age must be positive").required("Age is required")
+  country: yup.string().required("Country is required")
 });
+
+const countryOptions = [
+  { value: "in", label: "India" },
+  { value: "us", label: "United States" },
+  { value: "uk", label: "United Kingdom" }
+];
 
 export default function App() {
   const {
-    register,
+    control,
     handleSubmit,
-    formState: { errors, isValid }
+    formState: { isValid }
   } = useForm({
     resolver: yupResolver(schema),
-    mode: "onChange" 
+    mode: "onChange"
   });
 
   const onSubmit = (data) => {
-    console.log("Form Data:", data);
     alert(JSON.stringify(data, null, 2));
   };
 
   return (
-    <Box
-      component="form"
-      onSubmit={handleSubmit(onSubmit)}
-      sx={{ maxWidth: 400, mx: "auto", mt: 5 }}
-    >
+    <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ maxWidth: 400, mx: "auto", mt: 5 }}>
       <Typography variant="h5" gutterBottom>
-        Real-Time Form
+        Custom Form Components
       </Typography>
 
-      <TextField
-        label="Name"
-        fullWidth
-        margin="normal"
-        {...register("name")}
-        error={!!errors.name}
-        helperText={errors.name?.message}
-      />
+      <CustomTextField name="name" label="Name" control={control} />
+      <CustomTextField name="email" label="Email" control={control} />
+      <CustomSelect name="country" label="Country" control={control} options={countryOptions} />
 
-      <TextField
-        label="Email"
-        fullWidth
-        margin="normal"
-        {...register("email")}
-        error={!!errors.email}
-        helperText={errors.email?.message}
-      />
-
-      <TextField
-        label="Age"
-        type="number"
-        fullWidth
-        margin="normal"
-        {...register("age")}
-        error={!!errors.age}
-        helperText={errors.age?.message}
-      />
-
-      <Button
-        type="submit"
-        variant="contained"
-        color="primary"
-        fullWidth
-        sx={{ mt: 2 }}
-        disabled={!isValid}
-      >
+      <Button type="submit" variant="contained" fullWidth sx={{ mt: 2 }} disabled={!isValid}>
         Submit
       </Button>
     </Box>
