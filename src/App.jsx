@@ -1,21 +1,47 @@
-import { ThemeProvider, CssBaseline, Button } from '@mui/material';
-import { useState } from 'react';
-import { lightTheme, darkTheme } from './theme';
+// App.jsx
+import React, { useState } from 'react';
+import {ThemeProvider,CssBaseline,AppBar,Toolbar,Typography,IconButton,Drawer,List,ListItem,ListItemText,Box,Button,} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { appTheme } from './theme';
 
 function App() {
-  const [isDark, setIsDark] = useState(false);
-  const currentTheme = isDark ? darkTheme : lightTheme;
+  const [open, setOpen] = useState(false);
+
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
 
   return (
-    <ThemeProvider theme={currentTheme}>
+    <ThemeProvider theme={appTheme}>
       <CssBaseline />
-      <div style={{ padding: '2rem' }}>
-        <Button variant="contained" onClick={() => setIsDark(!isDark)}>
-          Dark Theme
-        </Button>
-        <h1>Custom Font Heading</h1>
-        <p>This is the Example of dark and light theme. .</p>
-      </div>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton edge="start" color="inherit" onClick={toggleDrawer}>
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            My App
+          </Typography>
+          <Button color="inherit">Login</Button>
+        </Toolbar>
+      </AppBar>
+
+      <Drawer anchor="left" open={open} onClose={toggleDrawer}>
+        <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer}>
+          <List>
+            {['Home', 'About', 'Contact'].map((text) => (
+              <ListItem button key={text}>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      </Drawer>
+
+      <Box sx={{ p: 3 }}>
+        <Typography variant="h4">Welcome To my Page!</Typography>
+        <Typography>This is the example of applying themeprovider including layout, navbar , drawer.</Typography>
+      </Box>
     </ThemeProvider>
   );
 }
