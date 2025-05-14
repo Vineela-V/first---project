@@ -1,19 +1,24 @@
-import React from 'react';
-import { ThemeProvider, CssBaseline, Button, TextField, Typography, Box } from '@mui/material';
-import theme from './theme';
+import React from "react";
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { Home, About, Contact, Logout } from './Pages';
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Box sx={{ p: 4 }}>
-        <Typography variant="h4">Make a note here!</Typography>
-        <TextField fullWidth label="Your Thoughts" variant="outlined" />
-        <Button variant="contained" color="primary" sx={{ mt: 2 }}>
-          Submit
-        </Button>
-      </Box>
-    </ThemeProvider>
+    <BrowserRouter>
+      <nav style={{ padding: '1rem', backgroundColor: '#f0f0f0' }}>
+        <Link to="/" style={{ marginRight: '1rem' }}>Home</Link>
+        <Link to="/about" style={{ marginRight: '1rem' }}>About</Link>
+        <Link to="/contact">Contact</Link>
+        <Link to="/Logout">Logout</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/Logout" element={<Logout />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
