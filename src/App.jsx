@@ -1,25 +1,38 @@
-import React from "react";
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import { Home, About, Contact, Logout } from './Pages';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from './Components/Layout';
+import DashboardLayout from './Components/DashboardLayout';
+import ProtectedRoute from './Components/ProtectRouted';
+import Home from './Pages/Home';
+import About from './Pages/About';
+import Contact from './Pages/Contact';
+import Login from './Pages/Login';
+import DashboardHome from './Pages/dashboard/DashboardHome';
+import Profile from './Pages/dashboard/Profile';
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
-      <nav style={{ padding: '1rem', backgroundColor: '#f0f0f0' }}>
-        <Link to="/" style={{ marginRight: '1rem' }}>Home</Link>
-        <Link to="/about" style={{ marginRight: '1rem' }}>About</Link>
-        <Link to="/contact">Contact</Link>
-        <Link to="/Logout">Logout</Link>
-      </nav>
-
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/Logout" element={<Logout />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="login" element={<Login />} />
+        </Route>
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <DashboardLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<DashboardHome />} />
+          <Route path="profile" element={<Profile />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
-}
+};
 
 export default App;
