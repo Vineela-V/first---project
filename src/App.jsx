@@ -1,11 +1,9 @@
-import DataTable from "./DataTable";
+import EditProfile from './components/EditProfile';
 
-function App() {
+export default function ProfilePage() {
   return (
-    <div style={{ padding: '2rem'}}>
-      <DataTable />
+    <div>
+      <EditProfile />
     </div>
   );
 }
-
-export default App;
