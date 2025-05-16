@@ -1,18 +1,17 @@
 import React from 'react';
-import LanguageContext from './context/LanguageContext'; 
-import LanguageSwitcher from './Components/LanguageSwitcher';
-import Greeting from './Components/Greeting';
+import { GlobalStateProvider } from './context/GlobalStateContext';
+import UserInfo from './Components/UserInfo';
+import ThemeSwitcher from './Components/ThemeSwitcher';
 
 function App() {
   return (
-    <LanguageProvider>
+    <GlobalStateProvider>
       <div>
-        <Header />
-        <LanguageSwitcher />
-        <Greeting />
+        <UserInfo />
+        <ThemeSwitcher />
       </div>
-    </LanguageProvider>
+    </GlobalStateProvider>
   );
-};
+}
 
 export default App;
