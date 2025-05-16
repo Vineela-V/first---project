@@ -1,11 +1,17 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import MainLayout from './Components/MainLayout';
+import LanguageContext from './context/LanguageContext'; 
+import Header from './Components/Header';
+import Greeting from './Components/Greeting';
 
-export default function App() {
+function App() {
   return (
-    <BrowserRouter>
-      <MainLayout />
-    </BrowserRouter>
+    <LanguageProvider>
+      <div>
+        <Header />
+        <Greeting />
+      </div>
+    </LanguageProvider>
   );
-}
+};
+
+export default App;
