@@ -1,16 +1,7 @@
-import React, { useContext } from "react";
-import { LanguageContext } from '../context/LanguageContext';
+import React from 'react';
 
-function Header() {
-    const {language, toggleLanguage } = useContext(LanguageContext);
-    
-    return (
-        <header>
-            <button onClick={toggleLanguage}>
-                {language === 'en' ? 'Switch to Telugu' : 'ఇంగ్లీష్ లోకి మార్చండి .'}
-            </button>
-        </header>
-    );
-}
+const Header = () => {
+  return <h1> Global State Example.</h1>;
+};
 
 export default Header;
