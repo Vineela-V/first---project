@@ -1,9 +1,11 @@
-import EditProfile from './components/EditProfile';
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import MainLayout from './Components/MainLayout';
 
-export default function ProfilePage() {
+export default function App() {
   return (
-    <div>
-      <EditProfile />
-    </div>
+    <BrowserRouter>
+      <MainLayout />
+    </BrowserRouter>
   );
 }
