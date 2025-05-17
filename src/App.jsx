@@ -1,13 +1,8 @@
 import React from 'react';
-import Counter from './features/counter/Counter';
+import AuthStatus from './features/auth/AuthStatus';
 
 function App() {
-  return (
-    <div>
-      <h2>Redux Toolkit Counter App</h2>
-      <Counter />
-    </div>
-  );
+  return <AuthStatus />;
 }
 
 export default App;
