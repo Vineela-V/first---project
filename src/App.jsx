@@ -1,24 +1,14 @@
 import React from 'react';
-import { Container, Grid, Typography } from '@mui/material';
-import ProductList from './features/products/ProductList';
+import { Container, Typography } from '@mui/material';
 import Cart from './features/cart/Cart';
 
-const App = () => {
+function App() {
   return (
-    <Container sx={{ marginTop: 4 }}>
-      <Typography variant="h3" align="center" gutterBottom>
-        Redux Toolkit Shopping Cart
-      </Typography>
-      <Grid container spacing={5}>
-        <Grid item xs={12} md={7}>
-          <ProductList />
-        </Grid>
-        <Grid item xs={12} md={5}>
-          <Cart />
-        </Grid>
-      </Grid>
+    <Container>
+      <Typography variant="h4" sx={{ mt: 4 }}>My MUI + Redux App</Typography>
+      <Cart />
     </Container>
   );
-};
+}
 
 export default App;
