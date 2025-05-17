@@ -1,12 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { GlobalStateProvider } from './GlobalStateContext';
+import Counter from './features/counter/Counter';
 
-ReactDOM.render(
-  <GlobalStateProvider>
-    <App />
-  </GlobalStateProvider>,
-  document.getElementById('root')
-);
+function App() {
+  return (
+    <div>
+      <h2>Redux Toolkit Counter App</h2>
+      <Counter />
+    </div>
+  );
+}
 
 export default App;
